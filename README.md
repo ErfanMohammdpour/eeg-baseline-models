@@ -131,7 +131,7 @@ graph TD
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/MiladSoleymani/baseline_models_eeg.git
+git clone https://github.com/yourusername/baseline_models_eeg.git
 cd baseline_models_eeg
 
 # 2. Create virtual environment
@@ -322,9 +322,9 @@ If you use this framework in your research, please cite:
 
 ```bibtex
 @software{baseline_models_eeg,
-  author = {Milad Soleymani},
+  author = {Your Name},
   title = {Baseline Models for EEG Analysis},
-  url = {https://github.com/MiladSoleymani/baseline_models_eeg},
+  url = {https://github.com/yourusername/baseline_models_eeg},
   year = {2024}
 }
 ```
