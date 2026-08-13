@@ -1,13 +1,15 @@
 # EEG Baseline Models
 
-Classical DSP + ML baselines for EEG classification. Built to compare fairly against self-supervised EEG embeddings ([eeg-self-supervised-embedding](https://github.com/ErfanMohammdpour/eeg-self-supervised-embedding)).
+Classical DSP + ML baselines for EEG classification. Companion to [eeg-self-supervised-embedding](https://github.com/ErfanMohammdpour/eeg-self-supervised-embedding).
 
-**Status:** ongoing · reproducible baselines first, protocol hardening next
+**Status:** ongoing · reproducible baselines first · subject-wise protocol next
 
 ## Results (Klinik · PSD + WTE)
 
-Source: `notebooks/klinik_psd_wte.ipynb`  
+From `notebooks/klinik_psd_wte.ipynb`  
 Setup: `KlinikDataset`, features `PSD + WTE` → flatten (2814-d), stratified `train_test_split` 80/20
+
+![Klinik accuracy](docs/figs/klinik_psd_wte_accuracy.png)
 
 | Model | Test acc | Test F1 (macro) | Train acc |
 |-------|----------|-----------------|-----------|
@@ -17,16 +19,17 @@ Setup: `KlinikDataset`, features `PSD + WTE` → flatten (2814-d), stratified `t
 | SVM (ovo) | 0.910 | 0.910 | 0.940 |
 | Gaussian NB | 0.849 | 0.848 | 0.818 |
 
-**Read carefully:** single random split, not patient/group LOSO. High scores can overestimate clinical generalization. Treat as feature/model reference, not deployment claim.
+![Klinik classification reports](docs/figs/klinik_psd_wte_reports.png)
 
-Full dump: [`results/klinik_psd_wte.md`](results/klinik_psd_wte.md)
+**Caveat:** single random split, not patient/group LOSO. Numbers = feature/model reference, not clinical claim.
 
-## What is in here
+Detail: [`results/klinik_psd_wte.md`](results/klinik_psd_wte.md)
+
+## Stack
 
 - **Features:** PSD (Welch), WTE, WPTE, CSP loader
 - **Models:** SVM, Balanced RF, XGBoost, Gaussian NB, k-NN
-- **Data loaders:** Klinik, BCI IV-2a, LEE, CHB-MIT, synthetic, CSP features
-- **Configs:** 10–20 electrode maps + experiment JSON
+- **Loaders:** Klinik, BCI IV-2a, LEE, CHB-MIT, synthetic, CSP features
 
 ## Setup
 
@@ -41,7 +44,6 @@ export PYTHONPATH=.
 ## Quick start
 
 ```bash
-# feature / model grid from JSON (needs local Klinik data under DATA_PATH)
 python scripts/run_experiment.py \
   --config configs/experiments/baseline.json \
   --dataset KlinikDataset \
@@ -54,18 +56,14 @@ Or open `notebooks/klinik_psd_wte.ipynb`.
 ## Layout
 
 ```
-configs/                 # electrode maps + experiment JSON
+configs/           # electrode maps + experiment JSON
 baseline/
-  data/                  # dataset loaders
-  features/              # DSP transforms
-  training/              # split / fit / metrics
-  config_io/             # config loaders
+  data/            # dataset loaders
+  features/        # DSP transforms
+  training/        # split / fit / metrics
+  config_io/
 scripts/
 notebooks/
+docs/figs/         # notebook-derived figures
 results/
-docs/IMPROVEMENTS.md
 ```
-
-## License
-
-MIT
