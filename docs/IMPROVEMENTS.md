@@ -1,26 +1,26 @@
-# How to make this baseline stack stronger
+# Roadmap
 
-## Protocol (highest ROI)
+## Protocol
 
-1. **Subject / patient-wise splits** — replace plain `train_test_split` with `LeaveOneGroupOut` / `StratifiedGroupKFold`. Current Klinik numbers are optimistic.
-2. **Frozen eval recipe** — one YAML per dataset: window length, filter band, sfreq, feature set, seed, metrics (acc / macro-F1 / AUROC).
-3. **Same recipe as SSL repo** — identical windows + labels so embedding transfer is comparable.
+1. Move to subject / patient-wise splits with `LeaveOneGroupOut` or `StratifiedGroupKFold`.
+2. Freeze one eval recipe per dataset: window length, filter band, sampling rate, feature set, seed, metrics.
+3. Match windowing and labels with the SSL companion repo for fair comparison.
 
-## Features & models
+## Features and models
 
-4. CSP + band-power stack on BCI IV-2a (standard MI baseline).
-5. Hyperparameter search with nested CV (outer subject CV, inner model select).
-6. Calibration + threshold sweep for seizure / Klinik (not only argmax accuracy).
+4. Add CSP + band-power baselines on BCI IV-2a.
+5. Nested CV for model selection under subject-wise outer folds.
+6. Calibration and threshold sweeps for seizure / Klinik tasks.
 
 ## Engineering
 
-7. One CLI entry (`scripts/run_experiment.py`) → CSV/JSON under `results/runs/`.
-8. Drop notebook-duplicated class defs; notebook only calls package.
-9. Unit tests on transforms (PSD shape, WTE dim, no NaN).
-10. Remove optional wandb hard-dep; make logging sink pluggable.
+7. One CLI entry (`scripts/run_experiment.py`) writing CSV/JSON under `results/runs/`.
+8. Keep notebooks thin: call package APIs only.
+9. Unit tests for transforms (PSD shape, WTE dim, no NaN).
+10. Optional logging sinks; no hard dependency on a single tracker.
 
-## Ambition upgrades
+## Ambition
 
-11. Public leaderboard table: Klinik / BCI2a / LEE / CHB-MIT with LOSO.
-12. Leakage audit script (trial overlap, patient ID in both splits).
-13. Tiny paper-style card: task, split, metric, seed, commit hash.
+11. Public tables for Klinik / BCI IV-2a / LEE / CHB-MIT with LOSO.
+12. Leakage audit script for trial and patient overlap.
+13. Short result card: task, split, metric, seed, commit hash.

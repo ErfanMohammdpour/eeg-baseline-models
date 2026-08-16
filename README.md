@@ -2,12 +2,13 @@
 
 Classical DSP + ML baselines for EEG classification. Companion to [eeg-self-supervised-embedding](https://github.com/ErfanMohammdpour/eeg-self-supervised-embedding).
 
-**Status:** ongoing · reproducible baselines first · subject-wise protocol next
+**Status:** ongoing. Reproducible DSP + ML baselines first; subject-wise evaluation next.
 
 ## Results (Klinik · PSD + WTE)
 
-From `notebooks/klinik_psd_wte.ipynb`  
-Setup: `KlinikDataset`, features `PSD + WTE` → flatten (2814-d), stratified `train_test_split` 80/20
+From `notebooks/klinik_psd_wte.ipynb`.
+
+Setup: `KlinikDataset`, features `PSD + WTE`, flatten to 2814 dimensions, stratified `train_test_split` 80/20.
 
 ![Klinik accuracy](docs/figs/klinik_psd_wte_accuracy.png)
 
@@ -21,7 +22,7 @@ Setup: `KlinikDataset`, features `PSD + WTE` → flatten (2814-d), stratified `t
 
 ![Klinik classification reports](docs/figs/klinik_psd_wte_reports.png)
 
-**Caveat:** single random split, not patient/group LOSO. Numbers = feature/model reference, not clinical claim.
+**Protocol note:** these numbers use a single stratified split, not patient / group leave-one-subject-out. Treat them as a feature and model reference, not a clinical claim.
 
 Detail: [`results/klinik_psd_wte.md`](results/klinik_psd_wte.md)
 
@@ -64,6 +65,6 @@ baseline/
   config_io/
 scripts/
 notebooks/
-docs/figs/         # notebook-derived figures
+docs/figs/
 results/
 ```

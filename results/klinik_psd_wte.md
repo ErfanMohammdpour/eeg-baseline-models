@@ -18,4 +18,4 @@
 
 Notes:
 - SVM row from classification report in notebook (rounded to 2 decimals in print).
-- Not subject-wise / LOSO. Re-run with `GroupKFold` / `LeaveOneGroupOut` before claiming clinical SOTA.
+- Split is stratified random, not subject-wise / LOSO.
